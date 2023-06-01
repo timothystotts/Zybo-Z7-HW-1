@@ -365,6 +365,7 @@ proc create_root_design { parentCell } {
    CONFIG.C_ALL_INPUTS_2 {1} \
    CONFIG.C_GPIO2_WIDTH {4} \
    CONFIG.C_GPIO_WIDTH {4} \
+   CONFIG.C_INTERRUPT_PRESENT {1} \
    CONFIG.C_IS_DUAL {1} \
    CONFIG.GPIO2_BOARD_INTERFACE {btns_4bits} \
    CONFIG.GPIO_BOARD_INTERFACE {sws_4bits} \
@@ -1542,7 +1543,7 @@ gpio[0]#qspi0_ss_b#qspi0_io[0]#qspi0_io[1]#qspi0_io[2]#qspi0_io[3]/HOLD_B#qspi0_
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat xlconcat_0 ]
   set_property -dict [ list \
-   CONFIG.NUM_PORTS {14} \
+   CONFIG.NUM_PORTS {15} \
  ] $xlconcat_0
 
   # Create instance: xlconstant_0, and set properties
@@ -1626,6 +1627,7 @@ gpio[0]#qspi0_ss_b#qspi0_io[0]#qspi0_io[1]#qspi0_io[2]#qspi0_io[3]/HOLD_B#qspi0_
   connect_bd_net -net axi_gpio_0_gpio_io_o [get_bd_ports hdmi_in_hpd] [get_bd_pins axi_gpio_video/gpio_io_o]
   connect_bd_net -net axi_gpio_0_ip2intc_irpt [get_bd_pins axi_gpio_video/ip2intc_irpt] [get_bd_pins xlconcat_0/In4]
   connect_bd_net -net axi_gpio_2pir_ip2intc_irpt [get_bd_pins axi_gpio_2pir/ip2intc_irpt] [get_bd_pins xlconcat_0/In9]
+  connect_bd_net -net axi_gpio_sw_btn_ip2intc_irpt [get_bd_pins axi_gpio_sw_btn/ip2intc_irpt] [get_bd_pins xlconcat_0/In14]
   connect_bd_net -net axi_i2s_adi_1_BCLK_O [get_bd_ports ac_bclk] [get_bd_pins axi_i2s_adi_1/BCLK_O]
   connect_bd_net -net axi_i2s_adi_1_LRCLK_O [get_bd_ports ac_pblrc] [get_bd_ports ac_reclrc] [get_bd_pins axi_i2s_adi_1/LRCLK_O]
   connect_bd_net -net axi_i2s_adi_1_SDATA_O [get_bd_ports ac_pbdat] [get_bd_pins axi_i2s_adi_1/SDATA_O]
